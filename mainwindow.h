@@ -3,8 +3,11 @@
 
 #include <QMainWindow>
 #include <QtGui>
-#include <vector>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlTableModel>
 #include "insertitem.h"
+#include "edittask.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +20,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+protected slots:
+        void changeEvent(QEvent *e);
 
 private slots:
     // action Buttons
@@ -36,10 +42,16 @@ private slots:
 
     //button hooks
     void enableRemoveTask_button();
+
+    //table
+    void updateTable();
     
 private:
     Ui::MainWindow *ui;
     QSettings *tasks;
+    QSqlDatabase db;
+    QSqlTableModel *all_model;
+    QSqlTableModel *search_model;
 
 };
 

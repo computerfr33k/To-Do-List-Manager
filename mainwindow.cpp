@@ -6,19 +6,45 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    tasks = new QSettings("tasks.ini", QSettings::IniFormat);
-    loadTasks();
 
-    ui->removeTask_button->setDisabled(true);
-    ui->editTask_button->setDisabled(true);
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("tasks.db");
+    db.open();
+    db.exec("create table if not exists tasks (Task, DueDate, Completed, Notes)");
+    all_model = new QSqlTableModel(this, db);
+    ui->tableView->setModel(all_model);
+    updateTable();
+    ui->tableView->sortByColumn(0, Qt::AscendingOrder);
+
+    search_model = new QSqlTableModel(this, db);
+    search_model->setTable("tasks");
+
+    // ini stuff
+    //tasks = new QSettings("tasks.ini", QSettings::IniFormat);
+    //loadTasks();
+
+    //ui->removeTask_button->setDisabled(true);
+    //ui->editTask_button->setDisabled(true);
     // hook remove and edit buttons
-    connect(ui->tableWidget, SIGNAL(currentCellChanged(int,int,int,int)), this, SLOT(enableRemoveTask_button()));
+    //connect(ui->tableWidget, SIGNAL(currentCellChanged(int,int,int,int)), this, SLOT(enableRemoveTask_button()));
+}
+
+void MainWindow::changeEvent(QEvent *e)
+{
+    QWidget::changeEvent(e);
+    switch (e->type()) {
+    case QEvent::LanguageChange:
+        ui->retranslateUi(this);
+        break;
+    default:
+        break;
+    }
 }
 
 // private slots
 void MainWindow::on_actionAbout_activated()
 {
-    QMessageBox::about(this, "About", "Version 0.1 Alpha");
+    QMessageBox::about(this, "About", "To Do List Manager \nCreated By Computerfr33k \nVersion: " + QApplication::applicationVersion());
 }
 
 void MainWindow::on_actionReport_A_Bug_activated()
@@ -43,6 +69,7 @@ void MainWindow::on_addTask_button_clicked()
 
     if( dialogBox->exec() )
     {
+        /*
         int row = ui->tableWidget->rowCount();
         ui->tableWidget->insertRow(row);
         ui->tableWidget->setItem(row, 0, new QTableWidgetItem(dialogBox->get_task()));
@@ -57,11 +84,25 @@ void MainWindow::on_addTask_button_clicked()
         tasks->setValue("notes", dialogBox->get_notes());
         tasks->endGroup();
         tasks->sync();
+        */
+
+        //db stuff
+        QSqlQuery query ("insert into tasks (Task, DueDate, Completed, Notes) values (:name, :dueDate, :completed, :notes)");
+        query.bindValue(0, dialogBox->get_task());
+        query.bindValue(1, dialogBox->get_dueDate());
+        query.bindValue(2, dialogBox->get_isCompleted());
+        query.bindValue(3, dialogBox->get_notes());
+
+        if(query.exec())
+        {
+            updateTable();
+        }
     }
 }
 
 void MainWindow::on_removeTask_button_clicked()
 {
+    /*
     qDebug() << ui->tableWidget->currentRow();
     if(ui->tableWidget->rowCount() == 1)
     {
@@ -87,10 +128,53 @@ void MainWindow::on_removeTask_button_clicked()
         tasks->endGroup();
         tasks->sync();
     }
+    */
+
+    QSqlQuery query;
+    query.prepare("delete from tasks where Task = \'" + ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0)).toString() +"\'");
+
+    if(!query.exec())
+    {
+        QMessageBox::warning(0,"Error", "Could Not Delete The Selected Task" + ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0)).toString() + ".");
+        return;
+    }
+    updateTable();
 }
 
 void MainWindow::on_editTask_button_clicked()
 {
+    editTask *dialog = new editTask;
+    connect(dialog, SIGNAL(finished(int)), dialog, SLOT(deleteLater()));
+    //set Task Name For Edit Task Dialog
+    dialog->set_taskName(ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0)).toString());
+    //set Due Date
+    dialog->set_dueDate(QDateTime::fromString(ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 1)).toString(), "MM/dd/yyyy hh:mm:ss AP"));
+
+    //copy completed to variable for easier comparing
+    QString completed = ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 2)).toString();
+    //set completed to yes or no
+    if(completed.compare("No") == 0)
+        dialog->set_completed(0);
+    else
+        dialog->set_completed(1);
+
+    dialog->set_notes(ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 3)).toString()); //set Notes
+    if(dialog->exec())
+    {
+        QSqlQuery query("update tasks set Task=:name,DueDate=:dueDate,Completed=:completed,Notes=:notes WHERE Task=\'" + ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0)).toString() + "\'");
+        query.bindValue(0, dialog->get_taskName());
+        query.bindValue(1, dialog->get_dueDate());
+        query.bindValue(2, dialog->get_completed());
+        query.bindValue(3, dialog->get_notes());
+        if(!query.exec())
+        {
+            qDebug() << "*** ERROR: line 171; mainwindow.cpp";
+            qDebug() << "SQL Error! ***";
+        }
+    }
+    updateTable();
+
+    /*
     int row = ui->tableWidget->currentRow();
     insertItem *DialogBox = new insertItem;
     connect(DialogBox, SIGNAL(finished(int)), DialogBox, SLOT(deleteLater()));
@@ -102,10 +186,12 @@ void MainWindow::on_editTask_button_clicked()
         ui->tableWidget->setItem(row, 2, new QTableWidgetItem( DialogBox->get_isCompleted() ));
         ui->tableWidget->setItem(row, 3, new QTableWidgetItem( DialogBox->get_notes() ));
     }
+    */
 }
 
 void MainWindow::loadTasks()
 {
+    /*
     QVector<QString> row = tasks->childGroups().toVector();
     for(int i=0; i < tasks->childGroups().toVector().size(); i++)
     {
@@ -129,6 +215,7 @@ void MainWindow::loadTasks()
         tasks->endGroup();
         tasks->sync();
     }
+    */
 
 }
 
@@ -139,17 +226,32 @@ void MainWindow::saveTasks()
 //button hooks
 void MainWindow::enableRemoveTask_button()
 {
-    if(ui->tableWidget->currentRow() != -1)
+    /*
+     *if(ui->tableWidget->currentRow() != -1)
     {
         ui->removeTask_button->setEnabled(true);
         ui->editTask_button->setEnabled(true);
     }
+    */
+}
+
+//table
+void MainWindow::updateTable()
+{
+    all_model->setTable("tasks");
+    all_model->select();
+    ui->tableView->setModel(all_model);
 }
 
 // end private slots
 
 MainWindow::~MainWindow()
 {
+    db.exec("VACUUM");
+    db.close();
+
+    delete all_model;
+    delete search_model;
     delete ui;
-    delete tasks;
+    //delete tasks;
 }

@@ -15,6 +15,23 @@ insertItem::~insertItem()
     delete ui;
 }
 
+void insertItem::setTask(QString name)
+{
+    ui->lineEdit->setText(name);
+}
+
+void setDueDate()
+{
+}
+
+void setCompleted()
+{
+}
+
+void setNotes(QString notes)
+{
+}
+
 QString insertItem::get_task()
 {
     return ui->lineEdit->text();
@@ -22,7 +39,8 @@ QString insertItem::get_task()
 
 QString insertItem::get_dueDate()
 {
-    return ui->dateTimeEdit->dateTime().toString("ddd MM/dd/yyyy hh:mm:ss AP");
+    // "ddd MM/dd/yyyy hh:mm:ss AP"
+    return ui->dateTimeEdit->dateTime().toString("MM/dd/yyyy hh:mm:ss AP");
 }
 
 QString insertItem::get_isCompleted()
