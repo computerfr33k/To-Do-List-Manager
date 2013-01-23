@@ -7,10 +7,19 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //create folders for storing the db
+    qDebug() << QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    bool ok = dir.mkpath(QDesktopServices::storageLocation(QDesktopServices::DataLocation));
+
+    if(!ok)
+        QMessageBox::critical(this, "Warning", "Could Not Create Storage Path");
+
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("tasks.db");
+    db.setDatabaseName(QDesktopServices::storageLocation(QDesktopServices::DataLocation) + "/tasks.db");
     db.open();
     db.exec("create table if not exists tasks (Task, DueDate, Completed, Notes)");
+    db.exec("create table if not exists preferences (row, sorting)");
+
     all_model = new QSqlTableModel(this, db);
     ui->tableView->setModel(all_model);
     updateTable();
@@ -60,6 +69,13 @@ void MainWindow::on_actionQuit_activated()
 void MainWindow::on_actionAbout_Qt_2_activated()
 {
     QMessageBox::aboutQt(this, "About Qt");
+}
+
+void MainWindow::on_actionPreferences_activated()
+{
+    Preferences *Dialog = new Preferences;
+    connect(Dialog, SIGNAL(finished(int)), Dialog, SLOT(deleteLater()));
+    Dialog->exec();
 }
 
 void MainWindow::on_addTask_button_clicked()

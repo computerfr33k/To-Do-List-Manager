@@ -8,6 +8,7 @@
 #include <QSqlTableModel>
 #include "insertitem.h"
 #include "edittask.h"
+#include "preferences.h"
 
 namespace Ui {
 class MainWindow;
@@ -30,6 +31,7 @@ private slots:
     void on_actionReport_A_Bug_activated();
     void on_actionQuit_activated();
     void on_actionAbout_Qt_2_activated();
+    void on_actionPreferences_activated();
 
     //push Buttons
     void on_addTask_button_clicked();
@@ -48,10 +50,11 @@ private slots:
     
 private:
     Ui::MainWindow *ui;
-    QSettings *tasks;
+    //QSettings *tasks;
     QSqlDatabase db;
     QSqlTableModel *all_model;
     QSqlTableModel *search_model;
+    QDir dir;
 
 };
 
