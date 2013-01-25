@@ -14,6 +14,10 @@ class Preferences : public QDialog
 public:
     explicit Preferences(QWidget *parent = 0);
     ~Preferences();
+
+public slots:
+    void set_sortRow(int index);
+    void set_sortDirection();
     
 private:
     Ui::Preferences *ui;

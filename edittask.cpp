@@ -28,6 +28,11 @@ void editTask::set_completed(int index)
     ui->comboBox->setCurrentIndex(index);
 }
 
+void editTask::set_priority(int index)
+{
+    ui->priority->setValue(index);
+}
+
 void editTask::set_notes(QString notes)
 {
     ui->textEdit->setText(notes);
@@ -46,6 +51,11 @@ QString editTask::get_dueDate()
 QString editTask::get_completed()
 {
     return ui->comboBox->currentText();
+}
+
+QString editTask::get_priority()
+{
+    return ui->priority->text();
 }
 
 QString editTask::get_notes()

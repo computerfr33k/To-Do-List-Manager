@@ -27,7 +27,7 @@
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="2">
-      <widget class="QComboBox" name="comboBox">
+      <widget class="QComboBox" name="sortDirection">
        <item>
         <property name="text">
          <string>Ascending</string>
@@ -48,7 +48,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QComboBox" name="comboBox_2">
+      <widget class="QComboBox" name="sortRow">
        <item>
         <property name="text">
          <string>Task</string>

@@ -6,6 +6,8 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlTableModel>
+#include <QSqlQueryModel>
+#include <QSqlRecord>
 #include "insertitem.h"
 #include "edittask.h"
 #include "preferences.h"
@@ -46,14 +48,14 @@ private slots:
     void enableRemoveTask_button();
 
     //table
+    void init_db();
     void updateTable();
     
 private:
     Ui::MainWindow *ui;
-    //QSettings *tasks;
     QSqlDatabase db;
     QSqlTableModel *all_model;
-    QSqlTableModel *search_model;
+    QSqlQueryModel search_model;
     QDir dir;
 
 };

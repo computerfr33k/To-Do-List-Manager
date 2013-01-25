@@ -12,3 +12,12 @@ Preferences::~Preferences()
 {
     delete ui;
 }
+
+void Preferences::set_sortRow(int index)
+{
+    ui->sortRow->setCurrentIndex(index);
+}
+
+void Preferences::set_sortDirection()
+{
+}

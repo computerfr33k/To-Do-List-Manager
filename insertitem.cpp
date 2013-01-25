@@ -15,23 +15,6 @@ insertItem::~insertItem()
     delete ui;
 }
 
-void insertItem::setTask(QString name)
-{
-    ui->lineEdit->setText(name);
-}
-
-void setDueDate()
-{
-}
-
-void setCompleted()
-{
-}
-
-void setNotes(QString notes)
-{
-}
-
 QString insertItem::get_task()
 {
     return ui->lineEdit->text();
@@ -46,6 +29,11 @@ QString insertItem::get_dueDate()
 QString insertItem::get_isCompleted()
 {
     return ui->comboBox->currentText();
+}
+
+QString insertItem::get_priority()
+{
+    return ui->priority->text();
 }
 
 QString insertItem::get_notes()

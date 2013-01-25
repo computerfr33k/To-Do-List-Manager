@@ -19,12 +19,8 @@ public:
     QString get_task();
     QString get_dueDate();
     QString get_isCompleted();
+    QString get_priority();
     QString get_notes();
-
-    void setTask(QString);
-    void setDueDate();
-    void setCompleted();
-    void setNotes(QString);
 
 private slots:
     void checkTaskText();

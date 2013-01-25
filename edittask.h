@@ -19,12 +19,14 @@ public:
     void set_taskName(QString);
     void set_dueDate(QDateTime);
     void set_completed(int);
+    void set_priority(int index);
     void set_notes(QString);
 
     //return statements
     QString get_taskName();
     QString get_dueDate();
     QString get_completed();
+    QString get_priority();
     QString get_notes();
     
 private:
