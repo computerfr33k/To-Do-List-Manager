@@ -5,6 +5,5 @@ install:
   - git clone https://github.com/pypt/fervor.git
 
 script:
-  - qmake -project
   - qmake To-Do-List-Manager.pro
   - make
