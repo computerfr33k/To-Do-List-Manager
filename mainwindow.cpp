@@ -47,12 +47,28 @@ void MainWindow::on_actionPreferences_activated()
 {
     Preferences *Dialog = new Preferences;
     connect(Dialog, SIGNAL(finished(int)), Dialog, SLOT(deleteLater()));
-    search_model.setQuery("SELECT * FROM preferences", db);
-    int sortRow = search_model.record(0).value(0).toInt();
-    Dialog->set_sortRow(sortRow);
+    search_model.setQuery("SELECT id,row,type FROM sort_preferences", db);
+    qDebug() << search_model.record(0).value(1).toInt();
+    qDebug() << search_model.record(0).value(2).toInt();
+
+    QSqlQuery query("");
+
+    //qDebug() << "Row: " << sortRow;
+    //qDebug() << "Type: " << sortType;
+
+    //Dialog->set_sortRow(sortRow);
+    //Dialog->set_sortType(sortType);
 
     if(Dialog->exec())
     {
+        qDebug() << Dialog->get_sortRow();
+        qDebug() << Dialog->get_sortType();
+
+        QSqlQuery query("insert or replace into sort_preferences (id, row, type) VALUES ('1', :row, :type)");
+        query.bindValue(0, Dialog->get_sortRow());
+        query.bindValue(1, Dialog->get_sortType());
+        query.exec();
+
     }
 }
 
@@ -154,7 +170,7 @@ void MainWindow::init_db()
     db.setDatabaseName(QDesktopServices::storageLocation(QDesktopServices::DataLocation) + "/tasks.db");
     db.open();
     db.exec("create table if not exists tasks (Task, DueDate, Completed, Priority, Notes)");
-    db.exec("create table if not exists sort_preferences (row, sorting)");
+    db.exec("create table if not exists sort_preferences (id INTEGER PRIMARY KEY, row, type)");
 
     all_model = new QSqlTableModel(this, db);
     ui->tableView->setModel(all_model);

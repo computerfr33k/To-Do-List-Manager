@@ -18,6 +18,17 @@ void Preferences::set_sortRow(int index)
     ui->sortRow->setCurrentIndex(index);
 }
 
-void Preferences::set_sortDirection()
+void Preferences::set_sortType(int index)
 {
+    ui->sortDirection->setCurrentIndex(index);
+}
+
+int Preferences::get_sortRow()
+{
+    return ui->sortRow->currentIndex();
+}
+
+int Preferences::get_sortType()
+{
+    return ui->sortDirection->currentIndex();
 }

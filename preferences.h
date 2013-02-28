@@ -13,11 +13,11 @@ class Preferences : public QDialog
     
 public:
     explicit Preferences(QWidget *parent = 0);
-    ~Preferences();
-
-public slots:
     void set_sortRow(int index);
-    void set_sortDirection();
+    void set_sortType(int index);
+    int get_sortRow();
+    int get_sortType();
+    ~Preferences();
     
 private:
     Ui::Preferences *ui;
