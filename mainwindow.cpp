@@ -51,13 +51,8 @@ void MainWindow::on_actionPreferences_activated()
     qDebug() << search_model.record(0).value(1).toInt();
     qDebug() << search_model.record(0).value(2).toInt();
 
-    QSqlQuery query("");
-
-    //qDebug() << "Row: " << sortRow;
-    //qDebug() << "Type: " << sortType;
-
-    //Dialog->set_sortRow(sortRow);
-    //Dialog->set_sortType(sortType);
+    Dialog->set_sortRow(search_model.record(0).value(1).toInt());
+    Dialog->set_sortType(search_model.record(0).value(2).toInt());
 
     if(Dialog->exec())
     {
