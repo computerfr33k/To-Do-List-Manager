@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     // Prerequisite for the Fervor updater
         QApplication::setOrganizationName("Computerfr33k");
         QApplication::setOrganizationDomain("computerfr33k.com");
-        QApplication::setApplicationVersion("0.2");
+        QApplication::setApplicationVersion("0.3");
 
         // Set feed URL before doing anything else
         FvUpdater::sharedUpdater()->SetFeedURL("http://dl.dropbox.com/u/23794188/To%20Do%20List%20Manager/Appcast.xml");

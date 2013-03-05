@@ -66,6 +66,11 @@
        </item>
        <item>
         <property name="text">
+         <string>Priority</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
          <string>Notes</string>
         </property>
        </item>

@@ -7,7 +7,7 @@
 QT       += core gui sql network
 
 TARGET = To-Do-List-Manager
-VERSION = 0.2
+VERSION = 0.3
 TEMPLATE = app
 
 # Fervor autoupdater
