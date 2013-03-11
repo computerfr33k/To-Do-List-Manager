@@ -1,6 +1,6 @@
 #include <QtGui/QApplication>
 #include "mainwindow.h"
-#include "fervor/fvupdater.h"
+//#include "fervor/fvupdater.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,10 +12,10 @@ int main(int argc, char *argv[])
         QApplication::setApplicationVersion("0.3");
 
         // Set feed URL before doing anything else
-        FvUpdater::sharedUpdater()->SetFeedURL("http://dl.dropbox.com/u/23794188/To%20Do%20List%20Manager/Appcast.xml");
+        //FvUpdater::sharedUpdater()->SetFeedURL("http://dl.dropbox.com/u/23794188/To%20Do%20List%20Manager/Appcast.xml");
 
         // Check for updates automatically
-        FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
+        //FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
 
 
     MainWindow w;

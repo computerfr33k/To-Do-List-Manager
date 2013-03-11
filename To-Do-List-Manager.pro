@@ -12,9 +12,9 @@ TEMPLATE = app
 
 # Fervor autoupdater
 # (set TARGET and VERSION of your app before including Fervor.pri)
-!include("fervor/Fervor.pri") {
-        error("Unable to include Fervor autoupdater.")
-}
+#!include("fervor/Fervor.pri") {
+#        error("Unable to include Fervor autoupdater.")
+#}
 
 SOURCES += main.cpp\
         mainwindow.cpp \
