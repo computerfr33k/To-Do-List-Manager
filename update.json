@@ -1,0 +1,11 @@
+{
+    "version":"0.3",
+    "windows":
+    {
+        "url":"http://to-do-list-manager.computerfr33k.com/tiki-download_file.php?fileId=4"
+    },
+    "linux":
+    {
+        "url":""
+    }
+}
