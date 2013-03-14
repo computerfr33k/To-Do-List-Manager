@@ -1,9 +1,0 @@
-language: cpp
-
-install:
-  - sudo apt-get install libqt4-dev qt4-qmake
-  - git clone https://github.com/pypt/fervor.git
-
-script:
-  - qmake To-Do-List-Manager.pro
-  - make
