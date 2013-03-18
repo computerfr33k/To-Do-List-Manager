@@ -2,13 +2,13 @@ To-Do-List-Manager
 ==================
 [![Build Status](https://travis-ci.org/computerfr33k/To-Do-List-Manager.png?branch=master)](https://travis-ci.org/computerfr33k/To-Do-List-Manager)
 
-##Project Wiki Located [Here.](http://to-do-list-manager.computerfr33k.com/tiki-index.php)
+##Project Wiki Located [Here.](http://to-do-list-manager.computerfr33k.com/)
 
 ##Downloads:
-[Available Downloads](http://to-do-list-manager.computerfr33k.com/tiki-index.php?page=Downloads)
+[Available Downloads](http://www.to-do-list-manager.computerfr33k.com/index.php?title=Downloads)
 
 ##Changelog:
-[History](http://to-do-list-manager.computerfr33k.com/tiki-index.php?page=Changelog)
+[Changelog](http://www.to-do-list-manager.computerfr33k.com/index.php?title=Changelog)
 
 ##To Do
-[To Do](http://to-do-list-manager.computerfr33k.com/tiki-index.php?page=ToDo)
+[To Do](http://www.to-do-list-manager.computerfr33k.com/index.php?title=ToDo)
