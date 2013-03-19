@@ -23,6 +23,17 @@ void Preferences::set_sortType(int index)
     ui->sortDirection->setCurrentIndex(index);
 }
 
+void Preferences::set_autoUpdate(bool temp)
+{
+    int index;
+    if(temp)
+        index = 0;
+    else
+        index = 1;
+
+    ui->autoUpdate->setCurrentIndex(index);
+}
+
 int Preferences::get_sortRow()
 {
     return ui->sortRow->currentIndex();
@@ -31,4 +42,12 @@ int Preferences::get_sortRow()
 int Preferences::get_sortType()
 {
     return ui->sortDirection->currentIndex();
+}
+
+bool Preferences::get_autoUpdate()
+{
+    if(ui->autoUpdate->currentIndex() == 0)
+        return true;
+    else
+        return false;
 }

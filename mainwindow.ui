@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>507</width>
+    <width>724</width>
     <height>434</height>
    </rect>
   </property>
@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>To Do List Manager by Computerfr33k v0.3 Alpha</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -28,6 +28,9 @@
       </property>
       <property name="alternatingRowColors">
        <bool>true</bool>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
       </property>
       <property name="sortingEnabled">
        <bool>true</bool>
@@ -66,8 +69,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>507</width>
-     <height>25</height>
+     <width>724</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -81,7 +84,10 @@
      <string>Help</string>
     </property>
     <addaction name="actionAbout"/>
+    <addaction name="separator"/>
     <addaction name="actionReport_A_Bug"/>
+    <addaction name="actionWebsite"/>
+    <addaction name="actionDonate"/>
     <addaction name="separator"/>
     <addaction name="actionAbout_Qt_2"/>
    </widget>
@@ -90,6 +96,7 @@
      <string>Settings</string>
     </property>
     <addaction name="actionPreferences"/>
+    <addaction name="actionCheck_For_Update"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSettings"/>
@@ -124,6 +131,21 @@
   <action name="actionPreferences">
    <property name="text">
     <string>Preferences</string>
+   </property>
+  </action>
+  <action name="actionWebsite">
+   <property name="text">
+    <string>Website</string>
+   </property>
+  </action>
+  <action name="actionCheck_For_Update">
+   <property name="text">
+    <string>Check For Update</string>
+   </property>
+  </action>
+  <action name="actionDonate">
+   <property name="text">
+    <string>Donate</string>
    </property>
   </action>
  </widget>

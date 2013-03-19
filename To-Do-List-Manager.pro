@@ -4,17 +4,11 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql network
+QT       += core gui sql network widgets
 
 TARGET = To-Do-List-Manager
 VERSION = 0.3
 TEMPLATE = app
-
-# Fervor autoupdater
-# (set TARGET and VERSION of your app before including Fervor.pri)
-#!include("fervor/Fervor.pri") {
-#        error("Unable to include Fervor autoupdater.")
-#}
 
 SOURCES += main.cpp\
         mainwindow.cpp \

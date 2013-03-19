@@ -2,12 +2,14 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QtGui>
+#include <QApplication>
+#include <QtWidgets>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlTableModel>
 #include <QSqlQueryModel>
 #include <QSqlRecord>
+#include <QSettings>
 #include "insertitem.h"
 #include "edittask.h"
 #include "preferences.h"
@@ -26,14 +28,19 @@ public:
 
 protected slots:
         void changeEvent(QEvent *e);
+        void closeEvent(QCloseEvent *event);
+        void restoreGUI();
 
-private slots:
+protected slots:
     // action Buttons
-    void on_actionAbout_activated();
-    void on_actionReport_A_Bug_activated();
-    void on_actionQuit_activated();
-    void on_actionAbout_Qt_2_activated();
-    void on_actionPreferences_activated();
+    void on_actionAbout_triggered();
+    void on_actionReport_A_Bug_triggered();
+    void on_actionQuit_triggered();
+    void on_actionAbout_Qt_2_triggered();
+    void on_actionPreferences_triggered();
+    void on_actionWebsite_triggered();
+    void on_actionCheck_For_Update_triggered();
+    void on_actionDonate_triggered();
 
     //push Buttons
     void on_addTask_button_clicked();
@@ -50,13 +57,19 @@ private slots:
     //table
     void init_db();
     void updateTable();
+
+    //settings file (settings.ini)
+    void readSettings();
+    void writeSettings();
     
-private:
+protected:
+    QStringList DataLoc;
     Ui::MainWindow *ui;
     QSqlDatabase db;
     QSqlTableModel *all_model;
     QSqlQueryModel search_model;
     QDir dir;
+    QSettings *settings;
 
 };
 

@@ -2,7 +2,7 @@
 #define INSERTITEM_H
 
 #include <QDialog>
-#include <QtGui>
+#include <QtWidgets>
 
 namespace Ui {
 class insertItem;

@@ -15,8 +15,11 @@ public:
     explicit Preferences(QWidget *parent = 0);
     void set_sortRow(int index);
     void set_sortType(int index);
+    void set_autoUpdate(bool temp);
+
     int get_sortRow();
     int get_sortType();
+    bool get_autoUpdate();
     ~Preferences();
     
 private:
