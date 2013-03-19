@@ -77,6 +77,8 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionRestore_Tasks_Settings"/>
+    <addaction name="actionExport_Tasks_Settings"/>
     <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
@@ -146,6 +148,16 @@
   <action name="actionDonate">
    <property name="text">
     <string>Donate</string>
+   </property>
+  </action>
+  <action name="actionExport_Tasks_Settings">
+   <property name="text">
+    <string>Export Tasks/Settings</string>
+   </property>
+  </action>
+  <action name="actionRestore_Tasks_Settings">
+   <property name="text">
+    <string>Restore Tasks/Settings</string>
    </property>
   </action>
  </widget>

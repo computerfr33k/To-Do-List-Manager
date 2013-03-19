@@ -10,6 +10,8 @@
 #include <QSqlQueryModel>
 #include <QSqlRecord>
 #include <QSettings>
+#include <QFileDialog>
+
 #include "insertitem.h"
 #include "edittask.h"
 #include "preferences.h"
@@ -41,6 +43,8 @@ protected slots:
     void on_actionWebsite_triggered();
     void on_actionCheck_For_Update_triggered();
     void on_actionDonate_triggered();
+    void on_actionRestore_Tasks_Settings_triggered();
+    void on_actionExport_Tasks_Settings_triggered();
 
     //push Buttons
     void on_addTask_button_clicked();

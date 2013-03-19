@@ -198,6 +198,44 @@ void MainWindow::on_editTask_button_clicked()
     updateTable();
 }
 
+void MainWindow::on_actionRestore_Tasks_Settings_triggered()
+{
+    QFileDialog fd;
+    QString dir = fd.getExistingDirectory(this, tr("Choose Directory To Restore From"), "", QFileDialog::ShowDirsOnly);
+    if(!dir.isEmpty())
+    {
+        QFile::remove(DataLoc.at(0) + "/settings.ini");
+        QFile::remove(DataLoc.at(0) + "/tasks.db");
+        QFile::copy(dir + "/settings.ini", DataLoc.at(0) + "/settings.ini");
+        QFile::copy(dir + "/tasks.db", DataLoc.at(0) + "/tasks.db");
+        QMessageBox::information(this, tr("Status"), tr("Restore Complete!"));
+        updateTable();
+    }
+}
+
+void MainWindow::on_actionExport_Tasks_Settings_triggered()
+{
+    QFileDialog fileDialog;
+    fileDialog.setFileMode(QFileDialog::DirectoryOnly);
+    QString dir = fileDialog.getExistingDirectory(this, tr("Open Directory"), "", QFileDialog::ShowDirsOnly);
+    if(!dir.isEmpty())
+    {
+        QFile::remove(dir + "/settings.ini");
+        QFile::remove(dir + "/tasks.db");
+        if(!QFile::copy(DataLoc.at(0) + "/settings.ini", dir + "/settings.ini"))
+        {
+            QMessageBox::warning(this, tr("Warning"), tr("settings.ini could not be copied"));
+            QFile::remove(dir + "/settings.ini");
+        }
+        if(!QFile::copy(DataLoc.at(0) + "/tasks.db", dir + "/tasks.db"))
+        {
+            QMessageBox::warning(this, tr("Warning"), tr("tasks.db could not be copied"));
+            QFile::remove(dir + "/tasks.db");
+        }
+        QMessageBox::information(this, tr("Export"), tr("Export Complete!"));
+    }
+}
+
 void MainWindow::loadTasks()
 {
 }
