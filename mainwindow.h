@@ -11,6 +11,8 @@
 #include <QSqlRecord>
 #include <QSettings>
 #include <QFileDialog>
+#include <QSystemTrayIcon>
+#include <QMenu>
 
 #include "insertitem.h"
 #include "edittask.h"
@@ -45,6 +47,7 @@ protected slots:
     void on_actionDonate_triggered();
     void on_actionRestore_Tasks_Settings_triggered();
     void on_actionExport_Tasks_Settings_triggered();
+    void on_trayMenu_triggered(QAction *a);
 
     //push Buttons
     void on_addTask_button_clicked();
@@ -61,10 +64,6 @@ protected slots:
     //table
     void init_db();
     void updateTable();
-
-    //settings file (settings.ini)
-    void readSettings();
-    void writeSettings();
     
 protected:
     QStringList DataLoc;
@@ -74,7 +73,8 @@ protected:
     QSqlQueryModel search_model;
     QDir dir;
     QSettings *settings;
-
+    QSystemTrayIcon *tray;
+    QMenu *trayMenu;
 };
 
 #endif // MAINWINDOW_H

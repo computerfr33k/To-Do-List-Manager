@@ -17,7 +17,11 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>To Do List Manager by Computerfr33k v0.3 Alpha</string>
+   <string>To Do List Manager by Computerfr33k v0.5 Beta</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="To-Do-List-Manager.qrc">
+    <normaloff>:/images/icon.png</normaloff>:/images/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -85,11 +89,10 @@
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="actionAbout"/>
-    <addaction name="separator"/>
     <addaction name="actionReport_A_Bug"/>
     <addaction name="actionWebsite"/>
     <addaction name="actionDonate"/>
+    <addaction name="actionAbout"/>
     <addaction name="separator"/>
     <addaction name="actionAbout_Qt_2"/>
    </widget>
@@ -162,6 +165,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="To-Do-List-Manager.qrc"/>
+ </resources>
  <connections/>
 </ui>

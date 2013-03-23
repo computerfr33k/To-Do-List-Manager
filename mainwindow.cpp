@@ -7,6 +7,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    tray = new QSystemTrayIcon;
+    trayMenu = new QMenu;
+    connect(trayMenu, SIGNAL(triggered(QAction*)), this, SLOT(on_trayMenu_triggered(QAction*)));
     restoreGUI();
     init_db();
 }
@@ -31,11 +34,18 @@ void MainWindow::closeEvent(QCloseEvent *event)
     settings->setValue("mainWindowGeometry", saveGeometry());
     settings->setValue("mainWindowState", saveState());
     settings->sync();
+    tray->hide();
     event->accept();
 }
 
 void MainWindow::restoreGUI()
 {
+    trayMenu->addAction("Hide");
+    trayMenu->addAction("Show");
+    trayMenu->addAction("Quit");
+    tray->setContextMenu(trayMenu);
+    tray->setIcon(QIcon(":/images/icon.png"));
+    tray->show();
     if(QFile("portable.dat").exists())
     {
         qDebug() << "portable.dat detected!";
@@ -51,7 +61,7 @@ void MainWindow::restoreGUI()
     if(!ok)
     {
         QMessageBox::critical(this, "Warning", "Could Not Create Storage Path");
-        qApp->exit(0);
+        this->close();
     }
     settings = new QSettings(DataLoc.at(0) + "/settings.ini", QSettings::IniFormat);
     restoreGeometry(settings->value("mainWindowGeometry").toByteArray());
@@ -71,7 +81,7 @@ void MainWindow::on_actionReport_A_Bug_triggered()
 
 void MainWindow::on_actionQuit_triggered()
 {
-    close();
+    this->close();
 }
 
 void MainWindow::on_actionAbout_Qt_2_triggered()
@@ -124,7 +134,17 @@ void MainWindow::on_actionCheck_For_Update_triggered()
 
 void MainWindow::on_actionDonate_triggered()
 {
-    QDesktopServices::openUrl(QUrl(""));
+    QDesktopServices::openUrl(QUrl("http://to-do-list-manager.computerfr33k.com/index.php?title=Donate"));
+}
+
+void MainWindow::on_trayMenu_triggered(QAction *a)
+{
+    if(a->text().compare("Show") == 0)
+        this->show();
+    else if(a->text().compare("Hide") == 0)
+        this->hide();
+    else if(a->text().compare("Quit") == 0)
+        this->close();
 }
 
 void MainWindow::on_addTask_button_clicked()
@@ -297,17 +317,6 @@ void MainWindow::updateTable()
         */
 }
 
-void MainWindow::readSettings()
-{
-    settings->beginGroup("autoupdate");
-    settings->value("enabled", true);
-    settings->endGroup();
-}
-
-void MainWindow::writeSettings()
-{
-}
-
 // end private slots
 
 MainWindow::~MainWindow()
@@ -315,4 +324,5 @@ MainWindow::~MainWindow()
     delete all_model;
     delete ui;
     delete settings;
+    delete tray;
 }

@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Edit Task</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="To-Do-List-Manager.qrc">
+    <normaloff>:/images/icon.png</normaloff>:/images/icon.png</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <layout class="QFormLayout" name="formLayout">
@@ -101,7 +105,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="To-Do-List-Manager.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

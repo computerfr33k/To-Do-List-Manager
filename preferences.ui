@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Preferences</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="To-Do-List-Manager.qrc">
+    <normaloff>:/images/icon.png</normaloff>:/images/icon.png</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="2" column="0">
     <widget class="QDialogButtonBox" name="buttonBox">
@@ -105,7 +109,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="To-Do-List-Manager.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

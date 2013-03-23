@@ -7,7 +7,7 @@
 QT       += core gui sql network widgets
 
 TARGET = To-Do-List-Manager
-VERSION = 0.3
+VERSION = 0.5
 TEMPLATE = app
 
 SOURCES += main.cpp\
@@ -25,3 +25,6 @@ FORMS    += mainwindow.ui \
     insertitem.ui \
     edittask.ui \
     preferences.ui
+
+RESOURCES += \
+    To-Do-List-Manager.qrc
