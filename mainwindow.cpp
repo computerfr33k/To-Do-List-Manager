@@ -218,6 +218,11 @@ void MainWindow::on_editTask_button_clicked()
     updateTable();
 }
 
+void MainWindow::on_tableView_doubleClicked(QModelIndex index)
+{
+    on_editTask_button_clicked();
+}
+
 void MainWindow::on_actionRestore_Tasks_Settings_triggered()
 {
     QFileDialog fd;

@@ -31,11 +31,10 @@ public:
     ~MainWindow();
 
 protected slots:
-        void changeEvent(QEvent *e);
-        void closeEvent(QCloseEvent *event);
-        void restoreGUI();
+    void changeEvent(QEvent *e);
+    void closeEvent(QCloseEvent *event);
+    void restoreGUI();
 
-protected slots:
     // action Buttons
     void on_actionAbout_triggered();
     void on_actionReport_A_Bug_triggered();
@@ -48,6 +47,7 @@ protected slots:
     void on_actionRestore_Tasks_Settings_triggered();
     void on_actionExport_Tasks_Settings_triggered();
     void on_trayMenu_triggered(QAction *a);
+    void on_tableView_doubleClicked(QModelIndex);
 
     //push Buttons
     void on_addTask_button_clicked();
