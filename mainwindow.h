@@ -17,6 +17,7 @@
 #include "insertitem.h"
 #include "edittask.h"
 #include "preferences.h"
+#include "licensedialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -47,7 +48,7 @@ protected slots:
     void on_actionRestore_Tasks_Settings_triggered();
     void on_actionExport_Tasks_Settings_triggered();
     void on_trayMenu_triggered(QAction *a);
-    void on_tableView_doubleClicked(QModelIndex);
+    void on_actionLicense_triggered();
 
     //push Buttons
     void on_addTask_button_clicked();
@@ -64,6 +65,7 @@ protected slots:
     //table
     void init_db();
     void updateTable();
+    void on_tableView_doubleClicked(QModelIndex);
     
 protected:
     QStringList DataLoc;

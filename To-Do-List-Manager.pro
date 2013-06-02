@@ -14,17 +14,20 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     insertitem.cpp \
     edittask.cpp \
-    preferences.cpp
+    preferences.cpp \
+    licensedialog.cpp
 
 HEADERS  += mainwindow.h \
     insertitem.h \
     edittask.h \
-    preferences.h
+    preferences.h \
+    licensedialog.h
 
 FORMS    += mainwindow.ui \
     insertitem.ui \
     edittask.ui \
-    preferences.ui
+    preferences.ui \
+    licensedialog.ui
 
 RESOURCES += \
     To-Do-List-Manager.qrc

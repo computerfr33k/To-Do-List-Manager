@@ -137,6 +137,13 @@ void MainWindow::on_actionDonate_triggered()
     QDesktopServices::openUrl(QUrl("http://to-do-list-manager.computerfr33k.com/index.php?title=Donate"));
 }
 
+void MainWindow::on_actionLicense_triggered()
+{
+    LicenseDialog *licenseDialog = new LicenseDialog;
+    licenseDialog->exec();
+    licenseDialog->deleteLater();
+}
+
 void MainWindow::on_trayMenu_triggered(QAction *a)
 {
     if(a->text().compare("Show") == 0)
