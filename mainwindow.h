@@ -47,8 +47,9 @@ protected slots:
     void on_actionDonate_triggered();
     void on_actionRestore_Tasks_Settings_triggered();
     void on_actionExport_Tasks_Settings_triggered();
-    void on_trayMenu_triggered(QAction *a);
+    void trayMenu_triggered(QAction *a);
     void on_actionLicense_triggered();
+    void on_actionHide_triggered();
 
     //push Buttons
     void on_addTask_button_clicked();

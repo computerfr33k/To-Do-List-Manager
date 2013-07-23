@@ -9,7 +9,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     tray = new QSystemTrayIcon;
     trayMenu = new QMenu;
-    connect(trayMenu, SIGNAL(triggered(QAction*)), this, SLOT(on_trayMenu_triggered(QAction*)));
+    trayMenu->addAction("Hide");
+    trayMenu->addAction("Show");
+    trayMenu->addAction("Quit");
+    tray->setContextMenu(trayMenu);
+    tray->setIcon(QIcon(":/images/icon.png"));
+    tray->show();
+    connect(trayMenu, SIGNAL(triggered(QAction*)), this, SLOT(trayMenu_triggered(QAction*)));
     restoreGUI();
     init_db();
 }
@@ -40,12 +46,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::restoreGUI()
 {
-    trayMenu->addAction("Hide");
-    trayMenu->addAction("Show");
-    trayMenu->addAction("Quit");
-    tray->setContextMenu(trayMenu);
-    tray->setIcon(QIcon(":/images/icon.png"));
-    tray->show();
     if(QFile("portable.dat").exists())
     {
         qDebug() << "portable.dat detected!";
@@ -144,7 +144,7 @@ void MainWindow::on_actionLicense_triggered()
     licenseDialog->deleteLater();
 }
 
-void MainWindow::on_trayMenu_triggered(QAction *a)
+void MainWindow::trayMenu_triggered(QAction *a)
 {
     if(a->text().compare("Show") == 0)
         this->show();
@@ -266,6 +266,11 @@ void MainWindow::on_actionExport_Tasks_Settings_triggered()
         }
         QMessageBox::information(this, tr("Export"), tr("Export Complete!"));
     }
+}
+
+void MainWindow::on_actionHide_triggered()
+{
+    this->hide();
 }
 
 void MainWindow::loadTasks()

@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>To Do List Manager by Computerfr33k v0.6 Beta</string>
+   <string>To Do List Manager by Computerfr33k v0.7 Beta</string>
   </property>
   <property name="windowIcon">
    <iconset resource="To-Do-List-Manager.qrc">
@@ -81,6 +81,8 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionHide"/>
+    <addaction name="separator"/>
     <addaction name="actionRestore_Tasks_Settings"/>
     <addaction name="actionExport_Tasks_Settings"/>
     <addaction name="actionQuit"/>
@@ -167,6 +169,11 @@
   <action name="actionLicense">
    <property name="text">
     <string>License</string>
+   </property>
+  </action>
+  <action name="actionHide">
+   <property name="text">
+    <string>Hide to taskbar</string>
    </property>
   </action>
  </widget>

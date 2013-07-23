@@ -7,7 +7,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{F50D5DE5-74DB-43F9-9D5D-0731FFEC4459}
 AppName=To Do List Manager
-AppVersion=0.5
+AppVersion=0.6
 ;AppVerName=To Do List Manager 0.3
 AppPublisher=Computerfr33k
 AppPublisherURL=http://www.computerfr33k.com/
@@ -15,7 +15,7 @@ AppSupportURL=http://www.computerfr33k.com/
 AppUpdatesURL=http://www.computerfr33k.com/
 DefaultDirName={pf}\To Do List Manager
 DefaultGroupName=To Do List Manager
-LicenseFile=C:\Users\Eric\Documents\To-Do-List-Manager\LICENSE.txt
+LicenseFile=C:\Users\Eric\Documents\Github\To-Do-List-Manager\LICENSE.txt
 OutputBaseFilename=to-do-list-manager-setup
 Compression=lzma
 SolidCompression=yes
@@ -28,10 +28,10 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "C:\Users\Eric\Documents\GitHub\To-Do-List-Manager-build-Desktop_Qt_5_0_1_MSVC2010_32bit-Release\release\To-Do-List-Manager.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Eric\Documents\GitHub\To-Do-List-Manager-build-Desktop_Qt_5_0_1_MSVC2010_32bit-Release\release\*"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Eric\Documents\GitHub\To-Do-List-Manager-build-Desktop_Qt_5_0_1_MSVC2010_32bit-Release\release\sqldrivers\*"; DestDir: "{app}\sqldrivers\"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\Eric\Documents\GitHub\To-Do-List-Manager-build-Desktop_Qt_5_0_1_MSVC2010_32bit-Release\release\platforms\*"; DestDir: "{app}\platforms\"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Eric\Documents\GitHub\build-To-Do-List-Manager-Desktop_Qt_5_0_2_MSVC2010_32bit-Release\release\To-Do-List-Manager.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Eric\Documents\GitHub\build-To-Do-List-Manager-Desktop_Qt_5_0_2_MSVC2010_32bit-Release\release\*"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Eric\Documents\GitHub\build-To-Do-List-Manager-Desktop_Qt_5_0_2_MSVC2010_32bit-Release\release\sqldrivers\*"; DestDir: "{app}\sqldrivers\"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Eric\Documents\GitHub\build-To-Do-List-Manager-Desktop_Qt_5_0_2_MSVC2010_32bit-Release\release\platforms\*"; DestDir: "{app}\platforms\"; Flags: ignoreversion recursesubdirs createallsubdirs
 ;Source: "C:\Qt\Qt5.0.1\vcredist\vcredist_sp1_x86.exe"; DestDir: {tmp}; Flags: deleteafterinstall
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
