@@ -18,6 +18,3 @@ moc_*.cpp
 qrc_*.cpp
 Makefile
 *-build-*
-
-# Ignore installer builds
-installer/
