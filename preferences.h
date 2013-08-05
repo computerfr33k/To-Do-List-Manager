@@ -16,10 +16,13 @@ public:
     void set_sortRow(int index);
     void set_sortType(int index);
     void set_autoUpdate(bool temp);
+    void set_portableMode(bool mode);
+    void set_dataLoc(QString location);
 
     int get_sortRow();
     int get_sortType();
     bool get_autoUpdate();
+    bool get_portableMode();
     ~Preferences();
     
 private:

@@ -34,6 +34,16 @@ void Preferences::set_autoUpdate(bool temp)
     ui->autoUpdate->setCurrentIndex(index);
 }
 
+void Preferences::set_portableMode(bool mode)
+{
+    ui->portableMode->setChecked(mode);
+}
+
+void Preferences::set_dataLoc(QString location)
+{
+    ui->dataLoc->setText(location);
+}
+
 int Preferences::get_sortRow()
 {
     return ui->sortRow->currentIndex();
@@ -50,4 +60,10 @@ bool Preferences::get_autoUpdate()
         return true;
     else
         return false;
+}
+
+bool Preferences::get_portableMode()
+{
+    //returns true if is portable mode
+    return ui->portableMode->isChecked();
 }

@@ -46,9 +46,11 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::restoreGUI()
 {
+    bool portable = false;
     if(QFile("portable.dat").exists())
     {
         qDebug() << "portable.dat detected!";
+        portable = true;
         DataLoc << "portable";
     }
     else
@@ -64,6 +66,11 @@ void MainWindow::restoreGUI()
         this->close();
     }
     settings = new QSettings(DataLoc.at(0) + "/settings.ini", QSettings::IniFormat);
+    if(portable)
+    {
+        settings->setValue("portableMode", true);
+        settings->sync();
+    }
     restoreGeometry(settings->value("mainWindowGeometry").toByteArray());
     restoreState(settings->value("mainWindowGeometry").toByteArray());
 }
@@ -102,6 +109,8 @@ void MainWindow::on_actionPreferences_triggered()
     Dialog->set_sortRow(settings->value("Sorting/row", 0).toInt());
     Dialog->set_sortType(settings->value("Sorting/type", 0).toInt());
     Dialog->set_autoUpdate(settings->value("AutoUpdate/enabled", true).toBool());
+    Dialog->set_portableMode(settings->value("portableMode", false).toBool());
+    Dialog->set_dataLoc(QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0));
 
     if(Dialog->exec())
     {
@@ -119,6 +128,18 @@ void MainWindow::on_actionPreferences_triggered()
         query.bindValue(1, Dialog->get_sortType());
         if(query.exec())
             updateTable();
+
+        if(Dialog->get_portableMode())
+        {
+            QFile file("portable.dat");
+            file.open(QIODevice::WriteOnly);
+            file.write("");
+            file.close();
+        }
+        else
+        {
+            QFile::remove("portable.dat");
+        }
     }
 }
 
@@ -187,6 +208,8 @@ void MainWindow::on_removeTask_button_clicked()
         return;
     }
     updateTable();
+    //disable the edit button because we just deleted a task so we are no longer on a task making this button invalid currently
+    ui->editTask_button->setDisabled(true);
 }
 
 void MainWindow::on_editTask_button_clicked()
@@ -297,6 +320,7 @@ void MainWindow::init_db()
         settings->setValue("Sorting/row", 0);
         settings->setValue("Sorting/type", 0);
         settings->setValue("AutoUpdate/enabled", true);
+        settings->setValue("portableMode", false);
         settings->sync();
     }
 
