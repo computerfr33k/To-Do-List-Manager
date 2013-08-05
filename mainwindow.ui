@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>To Do List Manager by Computerfr33k v0.7 Beta</string>
+   <string>To Do List Manager by Computerfr33k v0.8 Beta</string>
   </property>
   <property name="windowIcon">
    <iconset resource="To-Do-List-Manager.qrc">

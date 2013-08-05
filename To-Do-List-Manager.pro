@@ -7,7 +7,7 @@
 QT       += core gui sql network widgets
 
 TARGET = To-Do-List-Manager
-VERSION = 0.5
+VERSION = 0.8
 TEMPLATE = app
 
 SOURCES += main.cpp\

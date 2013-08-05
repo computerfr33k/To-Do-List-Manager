@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     // Prerequisite for the Fervor updater
         QApplication::setOrganizationName("Computerfr33k");
         QApplication::setOrganizationDomain("computerfr33k.com");
-        QApplication::setApplicationVersion("0.7");
+        QApplication::setApplicationVersion("0.8");
 
     MainWindow w;
     w.show();
