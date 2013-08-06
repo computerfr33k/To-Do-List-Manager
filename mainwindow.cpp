@@ -15,6 +15,10 @@ MainWindow::MainWindow(QWidget *parent) :
     tray->setContextMenu(trayMenu);
     tray->setIcon(QIcon(":/images/icon.png"));
     tray->show();
+    ui->editTask_button->setDisabled(true);
+    ui->removeTask_button->setDisabled(true);
+    connect(ui->tableView, SIGNAL(clicked(QModelIndex)), this, SLOT(enableRemoveTask_button()));
+    connect(ui->tableView, SIGNAL(clicked(QModelIndex)), this, SLOT(enableEditTask_button()));
     connect(trayMenu, SIGNAL(triggered(QAction*)), this, SLOT(trayMenu_triggered(QAction*)));
     restoreGUI();
     init_db();
@@ -194,22 +198,29 @@ void MainWindow::on_addTask_button_clicked()
         {
             updateTable();
         }
+        ui->editTask_button->setDisabled(true);
+        ui->removeTask_button->setDisabled(true);
     }
 }
 
 void MainWindow::on_removeTask_button_clicked()
 {
+    if(QMessageBox::No == QMessageBox::question(this, "Remove Task", "Are you sure you want to remove this task?"))
+    {
+        return;
+    }
     QSqlQuery query;
-    query.prepare("delete from tasks where Task = \'" + ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0)).toString() +"\'");
+    query.prepare("delete from tasks where Task = \'" + ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0)).toString().replace("'", "''") +"\'");
 
     if(!query.exec())
     {
-        QMessageBox::warning(0,"Error", "Could Not Delete The Selected Task" + ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0)).toString() + ".");
+        QMessageBox::warning(0,"Error", "Could Not Delete The Selected Task: " + ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0)).toString() + ".");
         return;
     }
     updateTable();
     //disable the edit button because we just deleted a task so we are no longer on a task making this button invalid currently
     ui->editTask_button->setDisabled(true);
+    ui->removeTask_button->setDisabled(true);
 }
 
 void MainWindow::on_editTask_button_clicked()
@@ -233,7 +244,7 @@ void MainWindow::on_editTask_button_clicked()
     dialog->set_notes(ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 4)).toString()); //set Notes
     if(dialog->exec())
     {
-        QSqlQuery query("update tasks set Task=:name,DueDate=:dueDate,Completed=:completed,Priority=:priority,Notes=:notes WHERE Task=\'" + ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0)).toString() + "\'");
+        QSqlQuery query("update tasks set Task=:name,DueDate=:dueDate,Completed=:completed,Priority=:priority,Notes=:notes WHERE Task=\'" + ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(), 0)).toString().replace("'", "''") + "\'");
         query.bindValue(0, dialog->get_taskName());
         query.bindValue(1, dialog->get_dueDate());
         query.bindValue(2, dialog->get_completed());
@@ -241,7 +252,7 @@ void MainWindow::on_editTask_button_clicked()
         query.bindValue(4, dialog->get_notes());
         if(!query.exec())
         {
-            qDebug() << "*** ERROR: line 171; mainwindow.cpp";
+            qDebug() << "*** ERROR: line 255; mainwindow.cpp";
             qDebug() << "SQL Error! ***";
         }
     }
@@ -307,6 +318,14 @@ void MainWindow::saveTasks()
 //button hooks
 void MainWindow::enableRemoveTask_button()
 {
+    if(ui->tableView->currentIndex().isValid())
+        ui->removeTask_button->setEnabled(true);
+}
+
+void MainWindow::enableEditTask_button()
+{
+    if(ui->tableView->currentIndex().isValid())
+        ui->editTask_button->setEnabled(true);
 }
 
 //table

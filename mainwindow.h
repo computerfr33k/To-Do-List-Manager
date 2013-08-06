@@ -62,6 +62,7 @@ protected slots:
 
     //button hooks
     void enableRemoveTask_button();
+    void enableEditTask_button();
 
     //table
     void init_db();
