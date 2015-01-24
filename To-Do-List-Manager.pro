@@ -31,3 +31,7 @@ FORMS    += mainwindow.ui \
 
 RESOURCES += \
     To-Do-List-Manager.qrc
+
+INSTALLS += target
+
+target.path = /opt/$(TARGET)
