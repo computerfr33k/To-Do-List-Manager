@@ -31,6 +31,8 @@ FORMS    += mainwindow.ui \
 
 RESOURCES += \
     To-Do-List-Manager.qrc
+    
+INSTALLS += target
 
 isEmpty(PREFIX) {
  PREFIX = /opt/$(TARGET)
