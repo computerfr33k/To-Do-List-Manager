@@ -32,6 +32,7 @@ FORMS    += mainwindow.ui \
 RESOURCES += \
     To-Do-List-Manager.qrc
 
-INSTALLS += target
-
-target.path = /opt/$(TARGET)
+isEmpty(PREFIX) {
+ PREFIX = /opt/$(TARGET)
+}
+target.path = $$PREFIX/
